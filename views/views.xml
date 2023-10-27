@@ -1,0 +1,124 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="tareas.list">
+      <field name="name">Tareas list</field>
+      <field name="model">tareas.tareas</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tareas.list_1">
+      <field name="name">Tareas Tarea</field>
+      <field name="model">tareas.tarea</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre" string="Nombre" required="1" placeholder="Introducir nombre"/>
+          <field name="descripcion"/>
+          <field name="horas"/>
+          <field name="fecha_creacion"/>
+          <field name="fecha_comienzo"/>
+          <field name="fecha_fin"/>
+          <field name="pausada"/>
+          <field name="sprint_id"/>
+          <field name="tecnologias_ids"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tareas.list_2">
+      <field name="name">Tareas Sprint</field>
+      <field name="model">tareas.sprint</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+          <field name="descripcion"/>
+          <field name="fecha_creacion"/>
+          <field name="fecha_fin"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="tareas.list_3">
+      <field name="name">Tareas Tecnologia</field>
+      <field name="model">tareas.tecnologia</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre"/>
+          <field name="foto"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="tareas.action_window">
+      <field name="name">Tareas</field>
+      <field name="res_model">tareas.tareas</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tareas.action_window_tarea">
+      <field name="name">Tarea</field>
+      <field name="res_model">tareas.tarea</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="tareas.action_window_sprint">
+      <field name="name">Sprint</field>
+      <field name="res_model">tareas.sprint</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="tareas.action_window_tecnologia">
+      <field name="name">Tecnologia</field>
+      <field name="res_model">tareas.tecnologia</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="tareas.action_server">
+      <field name="name">Tareas server</field>
+      <field name="model_id" ref="model_tareas_tareas"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <menuitem name="Tareas" id="tareas.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Tareas" id="tareas.menu_1" parent="tareas.menu_root"/>
+    <menuitem name="Sprint" id="tareas.menu_2" parent="tareas.menu_root"/>
+    <menuitem name="Tecnologías" id="tareas.menu_3" parent="tareas.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Nueva tarea" id="tareas.menu_1_list" parent="tareas.menu_1"
+              action="tareas.action_window_tarea"/>
+    <menuitem name="Nuevo sprint" id="tareas.menu_2_list" parent="tareas.menu_2"
+              action="tareas.action_window_sprint"/>
+    <menuitem name="Nueva tecnología" id="tareas.menu_3_list" parent="tareas.menu_3"
+              action="tareas.action_window_tecnologia"/>         
+<!--               
+    <menuitem name="Server to list" id="tareas" parent="tareas.menu_2"
+              action="tareas.action_server"/> -->
+
+  </data>
+</odoo>
